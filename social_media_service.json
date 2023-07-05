@@ -1,1 +1,76 @@
-[{"model": "social_media_service.profile", "pk": 1, "fields": {"user": 1, "username": "admin", "first_name": "Test_first", "last_name": "Test_last", "date_of_birth": "2023-07-05", "location": "", "phone": "", "profile_picture": "uploads/profile_image/admin-239ed456-f2c4-41c8-8f44-5c8f57006a5c.jpg", "bio": ""}}, {"model": "social_media_service.profile", "pk": 2, "fields": {"user": 2, "username": "user", "first_name": "Test_first", "last_name": "Test_last", "date_of_birth": "2023-07-05", "location": "Kiev", "phone": "12445643", "profile_picture": "uploads/profile_image/user-e5900d1c-004a-4f53-9da3-d8cd397ec096.png", "bio": "\"Lover of all things creative. Here to support users and ensure a seamless social media experience.\""}}, {"model": "social_media_service.post", "pk": 3, "fields": {"author": 1, "title": "qwerty", "content": "qwerty", "media": "uploads/post_image/qwerty-159ae842-93da-4e6e-b5fa-0abd40a7b363.jpg", "created_at": "2023-07-05T09:43:59.701Z"}}, {"model": "social_media_service.post", "pk": 4, "fields": {"author": 1, "title": "Announcing Our New Security Developer in Residence!", "content": "We announced our intention to fill this role back in January, and after a thorough search, we have chosen Seth Michael Larson! He joins the PSF for the next year as our first ever Security Developer-in-Residence. Seth is already well-known to the Python community – he was named a PSF Fellow last year and has already written a lot about Python and security on his blog.\r\n\r\nThis critical role would not be possible without funding from the OpenSSF Alpha-Omega Project. “At Alpha-Omega, we are excited to support the Python Software Foundation as they improve the security of PyPI, and more generally the Python ecosystem as a whole.” Alpha Omega Representative - Bob Callaway, Google", "media": "uploads/post_image/announcing-our-new-security-developer-in-residence-490231a7-d5b9-45d_HETNKIa.jfif", "created_at": "2023-07-05T11:11:26.864Z"}}, {"model": "social_media_service.post", "pk": 5, "fields": {"author": 1, "title": "This is a beta preview of Python 3.12", "content": "Python 3.12 is still in development. This release, 3.12.0b3, is the third of four planned beta release previews of 3.12.\r\n\r\nBeta release previews are intended to give the wider community the opportunity to test new features and bug fixes and to prepare their projects to support the new feature release.\r\n\r\nWe strongly encourage maintainers of third-party Python projects to test with 3.12 during the beta phase and report issues found to [the Python bug tracker (https://github.com/python/cpython/issues) as soon as possible. While the release is planned to be feature complete entering the beta phase, it is possible that features may be modified or, in rare cases, deleted up until the start of the release candidate phase (Monday, 2023-07-31). Our goal is to have no ABI changes after beta 4 and as few code changes as possible after 3.12.0rc1, the first release candidate. To achieve that, it will be extremely important to get as much exposure for 3.12 as possible during the beta phase.\r\n\r\nPlease keep in mind that this is a preview release and its use is not recommended for production environments.", "media": "uploads/post_image/this-is-a-beta-preview-of-python-312-89e6c9dd-a91b-43c3-add5-d15b6844140f.png", "created_at": "2023-07-05T11:12:32.736Z"}}, {"model": "social_media_service.post", "pk": 6, "fields": {"author": 2, "title": "The 2023 PSF Board Election is Open!", "content": "It’s time to cast your vote! Voting takes place from today Tuesday, June 20, through Friday, June 30, 2023 11:59pm UTC. If you are a voting member of the PSF, you should have gotten an email from “OpaVote Voting Link <noreply@opavote.com>” with your ballot, the subject line will read “Python Software Foundation Board of Directors Election 2023”. If you haven’t seen your ballot by Wednesday, please 1) check your spam folder for a message from “noreply@opavote.com” and if you don’t see anything 2) get in touch by emailing psf-elections@python.org so we can make sure we have the most up to date email for you. \r\n\r\nFour seats are open, but you can approve as many candidates as you like. BUT! Choose carefully before you press the big green vote button. Once your vote is cast, it cannot be changed.\r\n\r\nWe’re overwhelmed by how many of you are willing to contribute to the Python community by serving on the PSF board! Make sure you schedule some time to look at all their statements and choose your candidates carefully. OpaVote doesn’t let you go back and change your vote once you’ve made your choices.\r\n\r\nWho can vote? You need to be a Contributing, Managing, Supporting, or Fellow member as of June 15, 2023 and have affirmed your voting intention by June 19, 2023 to vote in this election. Read more about our membership types here or if you have questions about your membership status please email psf-elections@python.org", "media": "uploads/post_image/the-2023-psf-board-election-is-open-7c82a341-f915-47c2-9aa8-5c6d357ba26a.png", "created_at": "2023-07-05T11:33:41.861Z"}}]
+[
+   {
+      "model":"social_media_service.profile",
+      "pk":1,
+      "fields":{
+         "user":1,
+         "username":"admin",
+         "first_name":"Test_first",
+         "last_name":"Test_last",
+         "date_of_birth":"2023-07-05",
+         "location":"",
+         "phone":"",
+         "profile_picture":"uploads/profile_image/admin-239ed456-f2c4-41c8-8f44-5c8f57006a5c.jpg",
+         "bio":""
+      }
+   },
+   {
+      "model":"social_media_service.profile",
+      "pk":2,
+      "fields":{
+         "user":2,
+         "username":"user",
+         "first_name":"Test_first",
+         "last_name":"Test_last",
+         "date_of_birth":"2023-07-05",
+         "location":"Kiev",
+         "phone":"12445643",
+         "profile_picture":"uploads/profile_image/user-e5900d1c-004a-4f53-9da3-d8cd397ec096.png",
+         "bio":"\"Lover of all things creative. Here to support users and ensure a seamless social media experience.\""
+      }
+   },
+   {
+      "model":"social_media_service.post",
+      "pk":3,
+      "fields":{
+         "author":1,
+         "title":"qwerty",
+         "content":"qwerty",
+         "media":"uploads/post_image/qwerty-159ae842-93da-4e6e-b5fa-0abd40a7b363.jpg",
+         "created_at":"2023-07-05T09:43:59.701Z"
+      }
+   },
+   {
+      "model":"social_media_service.post",
+      "pk":4,
+      "fields":{
+         "author":1,
+         "title":"Announcing Our New Security Developer in Residence!",
+         "content":"We announced our intention to fill this role back in January, and after a thorough search, we have chosen Seth Michael Larson! He joins the PSF for the next year as our first ever Security Developer-in-Residence. Seth is already well-known to the Python community ï¿½ he was named a PSF Fellow last year and has already written a lot about Python and security on his blog.\r\n\r\nThis critical role would not be possible without funding from the OpenSSF Alpha-Omega Project. ï¿½At Alpha-Omega, we are excited to support the Python Software Foundation as they improve the security of PyPI, and more generally the Python ecosystem as a whole.ï¿½ Alpha Omega Representative - Bob Callaway, Google",
+         "media":"uploads/post_image/announcing-our-new-security-developer-in-residence-490231a7-d5b9-45d_HETNKIa.jfif",
+         "created_at":"2023-07-05T11:11:26.864Z"
+      }
+   },
+   {
+      "model":"social_media_service.post",
+      "pk":5,
+      "fields":{
+         "author":1,
+         "title":"This is a beta preview of Python 3.12",
+         "content":"Python 3.12 is still in development. This release, 3.12.0b3, is the third of four planned beta release previews of 3.12.\r\n\r\nBeta release previews are intended to give the wider community the opportunity to test new features and bug fixes and to prepare their projects to support the new feature release.\r\n\r\nWe strongly encourage maintainers of third-party Python projects to test with 3.12 during the beta phase and report issues found to [the Python bug tracker (https://github.com/python/cpython/issues) as soon as possible. While the release is planned to be feature complete entering the beta phase, it is possible that features may be modified or, in rare cases, deleted up until the start of the release candidate phase (Monday, 2023-07-31). Our goal is to have no ABI changes after beta 4 and as few code changes as possible after 3.12.0rc1, the first release candidate. To achieve that, it will be extremely important to get as much exposure for 3.12 as possible during the beta phase.\r\n\r\nPlease keep in mind that this is a preview release and its use is not recommended for production environments.",
+         "media":"uploads/post_image/this-is-a-beta-preview-of-python-312-89e6c9dd-a91b-43c3-add5-d15b6844140f.png",
+         "created_at":"2023-07-05T11:12:32.736Z"
+      }
+   },
+   {
+      "model":"social_media_service.post",
+      "pk":6,
+      "fields":{
+         "author":2,
+         "title":"The 2023 PSF Board Election is Open!",
+         "content":"Itï¿½s time to cast your vote! Voting takes place from today Tuesday, June 20, through Friday, June 30, 2023 11:59pm UTC. If you are a voting member of the PSF, you should have gotten an email from ï¿½OpaVote Voting Link <noreply@opavote.com>ï¿½ with your ballot, the subject line will read ï¿½Python Software Foundation Board of Directors Election 2023ï¿½. If you havenï¿½t seen your ballot by Wednesday, please 1) check your spam folder for a message from ï¿½noreply@opavote.comï¿½ and if you donï¿½t see anything 2) get in touch by emailing psf-elections@python.org so we can make sure we have the most up to date email for you. \r\n\r\nFour seats are open, but you can approve as many candidates as you like. BUT! Choose carefully before you press the big green vote button. Once your vote is cast, it cannot be changed.\r\n\r\nWeï¿½re overwhelmed by how many of you are willing to contribute to the Python community by serving on the PSF board! Make sure you schedule some time to look at all their statements and choose your candidates carefully. OpaVote doesnï¿½t let you go back and change your vote once youï¿½ve made your choices.\r\n\r\nWho can vote? You need to be a Contributing, Managing, Supporting, or Fellow member as of June 15, 2023 and have affirmed your voting intention by June 19, 2023 to vote in this election. Read more about our membership types here or if you have questions about your membership status please email psf-elections@python.org",
+         "media":"uploads/post_image/the-2023-psf-board-election-is-open-7c82a341-f915-47c2-9aa8-5c6d357ba26a.png",
+         "created_at":"2023-07-05T11:33:41.861Z"
+      }
+   }
+]
