@@ -42,3 +42,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 #### 8. Open your web browser and go to http://localhost:8000 to access the application.
+
+## For convenience, a test user has been created
+#### e-mail: user@user.com
+#### pass: 1234user
