@@ -35,6 +35,22 @@ source venv/bin/activate
 ```python
 python scripts.py
 ```
+### IMPORTANT: if scripts.py don't correctly work, need  to run application manually:
+```python
+pip install -r requirements.txt
+```
+```python
+python manage.py migrate user
+```
+```python
+python manage.py migrate social_media_service
+```
+```python
+python manage.py migrate
+```
+```python
+python manage.py runserver
+```
 #### 6. Open your web browser and go to http://localhost:8000 to access the application.
 
 #### 7. For convenience, a test user has been created
