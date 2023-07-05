@@ -5,8 +5,8 @@ from .views import ProfileViewSet, PostViewSet
 app_name = "social_media_service"
 
 router = routers.DefaultRouter()
-router.register(r"profiles", ProfileViewSet)
-router.register(r"posts", PostViewSet)
+router.register("profiles", ProfileViewSet)
+router.register("posts", PostViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
