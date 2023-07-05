@@ -25,24 +25,18 @@ venv\Scripts\activate
 ```python
 source venv/bin/activate
 ```
-#### 4. Install the project dependencies:
-```python
-pip install -r requirements.txt
-```
-#### 5. Apply database migrations:
-```python
-python manage.py migrate
-```
-#### 6. Create a superuser to access the admin panel:
-```python
-python manage.py createsuperuser
-```
-#### 7. Start the development server:
-```python
-python manage.py runserver
-```
-#### 8. Open your web browser and go to http://localhost:8000 to access the application.
+#### 4. Setting up Environment Variables:
 
-## For convenience, a test user has been created
-#### e-mail: user@user.com
-#### pass: 1234user
+##### 1. Rename a file name `.env_sample` to `.env` in the project root directory.
+
+##### 2. Make sure to replace `SECRET_KEY` with your actual secret key.
+
+#### 5. Run scripts.py:
+```python
+python scripts.py
+```
+#### 6. Open your web browser and go to http://localhost:8000 to access the application.
+
+#### 7. For convenience, a test user has been created
+##### e-mail: user@user.com
+##### pass: 1234user
