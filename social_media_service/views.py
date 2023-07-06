@@ -1,20 +1,17 @@
-from django.db import IntegrityError
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
-from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .models import Profile, Follow, Post, Like, Comment
+from .permissions import IsOwnerOrReadOnly
 from .serializers import (
     ProfileSerializer,
     FollowingListSerializer,
     FollowerListSerializer,
     PostSerializer,
-    FollowRequestSerializer,
-    LikeRequestSerializer,
     LikeListSerializer,
     PostListSerializer,
     CommentSerializer,
@@ -24,7 +21,7 @@ from .serializers import (
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.select_related("user")
     serializer_class = ProfileSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsOwnerOrReadOnly,)
 
     def get_queryset(self):
         """Returns a list of all user profiles that match the specified username parameter, if provided"""
@@ -38,13 +35,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         """Creates a new user profile and associates it with the authenticated user"""
-
-        try:
-            serializer.save(user=self.request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except IntegrityError:
-            message = "You already have a created profile."
-            return Response({"error": message}, status=status.HTTP_400_BAD_REQUEST)
+        serializer.save(user=self.request.user)
 
     def perform_update(self, serializer):
         """Updates an existing user profile for the authenticated user"""
@@ -52,10 +43,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def perform_destroy(self, instance):
         """Deletes the specified user profile if the authenticated user is the owner"""
-        if instance.user == self.request.user:
-            instance.delete()
-        else:
-            raise PermissionDenied("You do not have permission to delete this profile.")
+        instance.delete()
 
     @extend_schema(
         parameters=[
@@ -70,7 +58,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
         """Returns a list of all user profiles that match the 'username' parameter if it is specified"""
         return super().list(request, *args, **kwargs)
 
-    @action(detail=True, methods=["POST"], serializer_class=FollowRequestSerializer)
+    @action(detail=True, methods=["POST"], permission_classes=[IsAuthenticated])
     def follow(self, request, pk=None):
         """Creates a request to subscribe to the user profile with the specified pk"""
         follower = self.request.user.profile
@@ -88,7 +76,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
         return Response({"detail": f"You are now following {following.full_name}."})
 
-    @action(detail=True, methods=["POST"], serializer_class=FollowRequestSerializer)
+    @action(detail=True, methods=["POST"], permission_classes=[IsAuthenticated])
     def unfollow(self, request, pk=None):
         """Cancels the subscription request to the user profile with the specified pk"""
         follower = self.request.user.profile
@@ -149,7 +137,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.select_related("author")
     serializer_class = PostSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsOwnerOrReadOnly,)
 
     def get_queryset(self):
         """Returns a queryset of Post objects, filtered by title if provided"""
@@ -167,18 +155,13 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer):
         """Update a specific post, if the requesting user is the author"""
-        post = self.get_object()
-        if post.author == self.request.user.profile:
-            serializer.save(author=self.request.user.profile)
-        else:
-            raise PermissionDenied("You do not have permission to update this post.")
+
+        serializer.save(author=self.request.user.profile)
 
     def perform_destroy(self, instance):
-        """Deletes the post if the current user is the author"""
-        if instance.author == self.request.user.profile:
-            instance.delete()
-        else:
-            raise PermissionDenied("You do not have permission to delete this post.")
+        instance.delete()
+
+
 
     @extend_schema(
         parameters=[
@@ -193,7 +176,7 @@ class PostViewSet(viewsets.ModelViewSet):
         """Returns a list of posts that match the 'name' parameter if it is specified"""
         return super().list(request, *args, **kwargs)
 
-    @action(detail=True, methods=["POST"], serializer_class=LikeRequestSerializer)
+    @action(detail=True, methods=["POST"], permission_classes=[IsAuthenticated])
     def like(self, request, pk=None):
         """Allows users to like a post"""
         profile = self.request.user.profile
@@ -206,7 +189,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
         return Response({"detail": f"You are liked {post.title} now."})
 
-    @action(detail=True, methods=["POST"], serializer_class=LikeRequestSerializer)
+    @action(detail=True, methods=["POST"], permission_classes=[IsAuthenticated])
     def unlike(self, request, pk=None):
         """Allows users to unlike a post"""
         profile = self.request.user.profile
@@ -221,7 +204,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
         return Response({"detail": f"You have unliked {post.title}."})
 
-    @action(detail=True, methods=["GET"])
+    @action(detail=True, methods=["GET"], permission_classes=[IsAuthenticated])
     def comments(self, request, pk=None):
         """Returns all comments for a post"""
         post = self.get_object()
@@ -229,7 +212,7 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
-    @action(detail=True, methods=["POST"], serializer_class=CommentSerializer)
+    @action(detail=True, methods=["POST"], permission_classes=[IsAuthenticated])
     def add_comment(self, request, pk=None):
         """Adds a comment to a post"""
         post = self.get_object()
@@ -244,7 +227,7 @@ class PostViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=["PUT"],
         url_path="update_comment/(?P<comment_pk>[^/.]+)",
-        serializer_class=CommentSerializer,
+        permission_classes=[IsAuthenticated],
     )
     def update_comment(self, request, pk=None, comment_pk=None):
         """Updates a comment on a post"""

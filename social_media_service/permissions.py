@@ -11,3 +11,14 @@ class IsAdminOrIfAuthenticatedReadOnly(BasePermission):
             )
             or (request.user and request.user.is_staff)
         )
+
+
+class IsOwnerOrReadOnly(BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return True
+        try:
+            return obj.user == request.user
+        except AttributeError:
+            return obj.author == request.user.profile

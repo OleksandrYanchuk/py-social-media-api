@@ -1,9 +1,15 @@
+from django.db import IntegrityError
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
+
 from .models import Profile, Post, Like, Follow, Comment
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source="user.email", read_only=True)
+    username = serializers.CharField(
+        validators=[UniqueValidator(queryset=Profile.objects.all())]
+    )
 
     class Meta:
         model = Profile
@@ -19,6 +25,12 @@ class ProfileSerializer(serializers.ModelSerializer):
             "email",
             "phone",
         )
+
+    def create(self, validated_data):
+        try:
+            return super().create(validated_data)
+        except IntegrityError:
+            raise serializers.ValidationError("You already have a created profile.")
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -42,12 +54,6 @@ class PostListSerializer(serializers.ModelSerializer):
         fields = ("username", "author")
 
 
-class LikeRequestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Like
-        fields = ("id",)
-
-
 class LikeListSerializer(serializers.ModelSerializer):
     profile = serializers.CharField(source="profile.username", read_only=True)
     post = serializers.CharField(source="post.title", read_only=True)
@@ -64,12 +70,6 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ("id", "post", "profile", "text", "created_at")
-
-
-class FollowRequestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Follow
-        fields = ("id",)
 
 
 class FollowerListSerializer(serializers.ModelSerializer):
