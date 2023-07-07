@@ -51,7 +51,7 @@ class PostListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ("username", "author")
+        fields = ("title", "author")
 
 
 class LikeListSerializer(serializers.ModelSerializer):
@@ -73,9 +73,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class FollowerListSerializer(serializers.ModelSerializer):
-    follower = serializers.CharField(
-        source="follower.username", read_only=True
-    )
+    follower = serializers.CharField(source="follower.username", read_only=True)
 
     class Meta:
         model = Follow
@@ -83,9 +81,7 @@ class FollowerListSerializer(serializers.ModelSerializer):
 
 
 class FollowingListSerializer(serializers.ModelSerializer):
-    following = serializers.CharField(
-        source="following.username", read_only=True
-    )
+    following = serializers.CharField(source="following.username", read_only=True)
 
     class Meta:
         model = Follow
