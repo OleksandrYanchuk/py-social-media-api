@@ -35,11 +35,8 @@ source venv/bin/activate
 
 ##### 2. Make sure to replace `SECRET_KEY` with your actual secret key.
 
-#### 6. Run scripts.py:
-```python
-python scripts.py
-```
-### IMPORTANT: if scripts.py don't correctly work, need  to run application manually:
+#### 6. For run application manually make next steps:
+
 ```python
 pip install -r requirements.txt
 ```
