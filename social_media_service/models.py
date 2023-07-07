@@ -48,9 +48,7 @@ def post_image_file_path(instance, filename):
 
 
 class Post(models.Model):
-    author = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name="posts"
-    )
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="posts")
     title = models.CharField(max_length=255, unique=True)
     content = models.TextField()
     media = models.ImageField(upload_to=post_image_file_path, null=True, blank=True)
@@ -68,19 +66,13 @@ class Follow(models.Model):
 
 
 class Like(models.Model):
-    profile = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name="likes"
-    )
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="likes"
-    )
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="likes")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes")
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="comments"
-    )
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     profile = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name="comments"
     )

@@ -21,7 +21,10 @@ from .serializers import (
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.select_related("user")
     serializer_class = ProfileSerializer
-    permission_classes = (IsAuthenticated, IsOwnerOrReadOnly,)
+    permission_classes = (
+        IsAuthenticated,
+        IsOwnerOrReadOnly,
+    )
 
     def get_queryset(self):
         """Returns a list of all user profiles that match the specified username parameter, if provided"""
@@ -137,7 +140,10 @@ class ProfileViewSet(viewsets.ModelViewSet):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.select_related("author")
     serializer_class = PostSerializer
-    permission_classes = (IsAuthenticated, IsOwnerOrReadOnly,)
+    permission_classes = (
+        IsAuthenticated,
+        IsOwnerOrReadOnly,
+    )
 
     def get_queryset(self):
         """Returns a queryset of Post objects, filtered by title if provided"""
@@ -160,8 +166,6 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def perform_destroy(self, instance):
         instance.delete()
-
-
 
     @extend_schema(
         parameters=[
