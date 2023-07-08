@@ -57,3 +57,16 @@ python manage.py runserver
 #### 8. For convenience, a test user has been created
 ##### e-mail: user@user.com
 ##### pass: 1234user
+###### For correct operation, it may be necessary to update the access token, for this you need to take the following steps:
+###### - you can get a refresh token at the following link:
+```python
+http://localhost:8000/api/user/token/
+```
+##### - after which you need to follow the link to generate a new access token:
+```python
+http://localhost:8000/api/user/token/refresh/
+```
+##### also, for correct operation, you need to install an extension for working with request and response headers, for example ModHeader.
+##### you need to enter "Authorization" in the name field, and "Bearer <your access tiken>" in the value field.
+
+#### After all previous steps py-social-media-api will work correctly.
