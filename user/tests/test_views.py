@@ -80,30 +80,32 @@ class ManageUserViewTest(TestCase):
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_retrieve_user(self):
+        view = ManageUserView.as_view()
+        request = self.factory.get("/me/")
+        force_authenticate(request, user=self.user)
+        response = view(request)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["email"], self.user.email)
+
     def test_update_user(self):
         view = ManageUserView.as_view()
         request = self.factory.put(
-            "/manage-user/",
+            "/me/",
             {
                 "email": "updated@example.com",
-                "is_staff": True,
+                "password": "newpassword456",
             },
             format="json",
         )
         force_authenticate(request, user=self.user)
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(
-            response.data,
-            {
-                "email": "updated@example.com",
-                "is_staff": True,
-            },
-        )
-        self.user.refresh_from_db()
-        self.assertEqual(self.user.email, "updated@example.com")
-        self.assertTrue(self.user.check_password("testpassword"))
-        self.assertTrue(self.user.is_staff)
+        self.assertEqual(response.data["email"], "updated@example.com")
+
+
+        updated_user = self.User.objects.get(pk=self.user.pk)
+        self.assertTrue(updated_user.check_password("newpassword456"))
 
 
 
