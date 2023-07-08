@@ -67,6 +67,6 @@ http://localhost:8000/api/user/token/
 http://localhost:8000/api/user/token/refresh/
 ```
 ##### also, for correct operation, you need to install an extension for working with request and response headers, for example ModHeader.
-##### you need to enter "Authorization" in the name field, and "Bearer <your access tiken>" in the value field.
+##### in expansion you need to enter "Authorization" in the name field, and "Bearer [your access tiken]" in the value field.
 
 #### After all previous steps py-social-media-api will work correctly.
