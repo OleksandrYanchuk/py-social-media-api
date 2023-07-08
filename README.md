@@ -70,3 +70,11 @@ http://localhost:8000/api/user/token/refresh/
 ##### in expansion you need to enter "Authorization" in the name field, and "Bearer [your access tiken]" in the value field.
 
 #### After all previous steps py-social-media-api will work correctly.
+#### 9. If necessary, it is possible to register a new user using the following link:
+```python
+http://localhost:8000/api/user/register/
+```
+##### You can get information about the available tokens for the user at the following link:
+```python
+http://localhost:8000/api/user/token/
+```
